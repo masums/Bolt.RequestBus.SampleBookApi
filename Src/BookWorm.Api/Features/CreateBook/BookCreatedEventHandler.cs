@@ -15,7 +15,7 @@ namespace BookWorm.Api.Features.CreateBook
 
         public void Handle(BookCreatedEvent eEvent)
         {
-            store.Write(Constants.PersistanceStoreNames.EventSource, eEvent);
+            store.Append(Constants.PersistanceStoreNames.EventSource, eEvent);
         }
     }
 }

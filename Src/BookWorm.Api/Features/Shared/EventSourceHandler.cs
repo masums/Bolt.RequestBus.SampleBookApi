@@ -27,7 +27,7 @@ namespace BookWorm.Api.Features.Shared
         {
             if(eEvent is IIgnoreEventSource) return;
 
-            store.Write(Constants.PersistanceStoreNames.EventSource, new
+            store.Append(Constants.PersistanceStoreNames.EventSource, new
             {
                 CorrelationId = requestContext.CorrelationId(),
                 AppId = settings.ApplicationId,
@@ -40,7 +40,7 @@ namespace BookWorm.Api.Features.Shared
         {
             if (eEvent is IIgnoreEventSource) return Task.FromResult(0);
 
-            store.Write(Constants.PersistanceStoreNames.EventSource, new
+            store.Append(Constants.PersistanceStoreNames.EventSource, new
             {
                 CorrelationId = requestContext.CorrelationId(),
                 AppId = settings.ApplicationId,

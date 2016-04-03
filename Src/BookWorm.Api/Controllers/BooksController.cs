@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Bolt.RequestBus;
-using Sample.Api.Features.CreateBook;
-using Sample.Api.Features.DeleteBook;
-using Sample.Api.Features.GetBooks;
-using Sample.Api.Features.Shared.Extensions;
-using Sample.Api.Infrastructure.Extensions;
+using BookWorm.Api.Features.CreateBook;
+using BookWorm.Api.Features.DeleteBook;
+using BookWorm.Api.Features.GetBooks;
+using BookWorm.Api.Features.Shared.Extensions;
+using BookWorm.Api.Infrastructure.Extensions;
 
-namespace Sample.Api.Controllers
+namespace BookWorm.Api.Controllers
 {
     [RoutePrefix("v1/books")]
     public class GetBooksController : ApiController

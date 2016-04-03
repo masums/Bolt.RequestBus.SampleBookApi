@@ -20,12 +20,12 @@ namespace BookWorm.Api.Infrastructure.PersistentStores
             srcDir = $"{AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\')}\\Data";
         }
 
-        public void Write<T>(IEnumerable<T> data)
+        public void Append<T>(IEnumerable<T> data)
         {
-            Write(typeof(T).Name, data);
+            Append(typeof(T).Name, data);
         }
 
-        public void Write<T>(string groupName, IEnumerable<T> data)
+        public void Append<T>(string groupName, IEnumerable<T> data)
         {
             var filePath = GetFilePath(groupName);
 
@@ -48,6 +48,32 @@ namespace BookWorm.Api.Infrastructure.PersistentStores
             {
                 FileLock.ExitWriteLock();
             }
+        }
+
+        public void Write<T>(string groupName, IEnumerable<T> data)
+        {
+            var filePath = GetFilePath(groupName);
+
+            FileLock.EnterWriteLock();
+
+            try
+            {
+                if (!Directory.Exists(srcDir))
+                {
+                    Directory.CreateDirectory(srcDir);
+                }
+                
+                File.WriteAllText(filePath, serializer.Serialize(data));
+            }
+            finally
+            {
+                FileLock.ExitWriteLock();
+            }
+        }
+
+        public void Write<T>(IEnumerable<T> data)
+        {
+            Write(typeof(T).Name, data);
         }
 
         public IEnumerable<T> Read<T>()

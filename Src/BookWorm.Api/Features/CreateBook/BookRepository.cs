@@ -22,7 +22,7 @@ namespace BookWorm.Api.Features.CreateBook
 
         public void Insert(BookRecord record)
         {
-            store.Write(record);
+            store.Append(record);
         }
 
         public BookRecord GetByTitle(string title)

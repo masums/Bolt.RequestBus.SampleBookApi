@@ -24,7 +24,7 @@ namespace BookWorm.Api.Features.CreateBook
         {
             var id = Guid.NewGuid();
             
-            store.Write(new BookRecord
+            store.Append(new BookRecord
             {
                 Title = msg.Title,
                 Price = msg.Price,
