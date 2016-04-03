@@ -224,6 +224,7 @@
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Features\CreateBook\BookCreatedEvent.cs" />
     <Compile Include="Features\CreateBook\BookCreatedEventHandler.cs" />
+    <Compile Include="Features\CreateBook\BookRecordMappingTask.cs" />
     <Compile Include="Features\CreateBook\BookRepository.cs" />
     <Compile Include="Features\CreateBook\CreateBookRequest.cs" />
     <Compile Include="Features\CreateBook\CreateBookRequestHandler.cs" />

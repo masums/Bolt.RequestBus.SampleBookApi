@@ -3,34 +3,34 @@ using Bolt.Logger;
 using Bolt.RequestBus;
 using Bolt.RequestBus.Handlers;
 using BookWorm.Api.Features.Shared.Dto;
-using BookWorm.Api.Infrastructure.PersistentStores;
+using BookWorm.Api.Infrastructure.Mappers;
 
 namespace BookWorm.Api.Features.CreateBook
 {
     public class CreateBookRequestHandler : RequestHandlerBase<CreateBookRequest, Guid>
     {
         private readonly ILogger logger;
-        private readonly IPersistentStore store;
+        private readonly IBookRepository repository;
         private readonly IRequestBus bus;
+        private readonly IMapper mapper;
 
-        public CreateBookRequestHandler(ILogger logger, IPersistentStore store, IRequestBus bus)
+        public CreateBookRequestHandler(ILogger logger, IBookRepository repository, IRequestBus bus, IMapper mapper)
         {
             this.logger = logger;
-            this.store = store;
+            this.repository = repository;
             this.bus = bus;
+            this.mapper = mapper;
         }
 
         protected override Guid Process(CreateBookRequest msg)
         {
             var id = Guid.NewGuid();
-            
-            store.Append(new BookRecord
-            {
-                Title = msg.Title,
-                Price = msg.Price,
-                Author = msg.Author,
-                Id = id
-            });
+
+            var record = mapper.Map<BookRecord>(msg);
+
+            record.Id = id;
+
+            repository.Insert(record);
 
             logger.Info($"New book created with id {id} and title {msg.Title}");
 

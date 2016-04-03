@@ -181,3 +181,4 @@ $RECYCLE.BIN/
 
 #nuget package creator
 _CreateNewNuGetPackage/Config.ps1
+Src/BookWorm.Api/Data/
